@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700;900&display=swap');
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 400px;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid #fff;
+        }
+
+        .card-front h1 {
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f, #c44569, #a73a8c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+            }
+            to {
+                filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8));
+            }
+        }
+
+        .card-front .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 25%; left: 25%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 35%; right: 15%; animation-delay: 1.5s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            transform: rotateY(180deg);
+            border: 3px solid #fff;
+        }
+
+        .card-back h2 {
+            font-size: 42px;
+            color: #c44569;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .card-back p {
+            font-size: 32px;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .card-back p strong {
+            font-size: 36px;
+            display: block;
+            margin-top: 15px;
+            font-family: 'Pacifico', cursive;
+            color: #a73a8c;
+        }
+
+        .tap-hint {
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 320px;
+                height: 420px;
+            }
+
+            .card-front h1 {
+                font-size: 42px;
+            }
+
+            .card-back h2 {
+                font-size: 32px;
+            }
+
+            .card-back p {
+                font-size: 24px;
+            }
+            
+            .card-back p strong {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" onclick="flipCard()">
+        <div class="card" id="card">
+            <div class="card-face card-front">
+                <div class="sparkles">
+                    <span class="sparkle"></span>
+                    <span class="sparkle"></span>
+                    <span class="sparkle"></span>
+                    <span class="sparkle"></span>
+                </div>
+                <h1>Happy<br>New Year<br>2026</h1>
+                <div class="tap-hint">👆 क्लिक करें</div>
+            </div>
+            <div class="card-face card-back">
+                <h2> Happy New Year </h2>
+                <p>
+                    डब्बे पे डब्बा डब्बे में केक<br>
+                    तू है दुनिया का मुठ्ठल नंबर 1<br><br>
+                    <strong>Happy निहुर लाडले 🎉💝</strong>
+                </p>
+                <div class="tap-hint">👆 वापस जाने के लिए क्लिक करें</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function flipCard() {
+            const card = document.getElementById('card');
+            card.classList.toggle('flipped');
+        }
+    </script>
+</body>
+</html>
